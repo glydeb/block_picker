@@ -1,16 +1,12 @@
 $(document).ready(function () {
 
   // Initialize variables and get initial color
-  var color = getColor();
   var success = 'Good Job!';
   var missText = 'That was the wrong box - try again.';
-  var boxes = ['red', 'blue', 'yellow', 'green', 'purple' ];
+  var boxes = ['red', 'blue', 'yellow', 'green', 'purple'];
+  var color = getColor(boxes);
 
-  // insert the boxes
-  function createBoxes(boxColor) {
-    $('body').append('<div class="' + boxColor + '"></div>')
-  }
-
+  // Create the boxes
   for (var i = 0; i < boxes.length; i++) {
     createBoxes(boxes[i]);
   }
@@ -36,7 +32,7 @@ $(document).ready(function () {
   // Update paragraphs in the event of a correct click
   // picks a new color, as well.
   function updateSuccess() {
-    var newColor = getColor();
+    var newColor = getColor(boxes);
 
     //update results
     if ($('.results').length === 0) {
@@ -62,21 +58,21 @@ $(document).ready(function () {
 
   }
 
+  //UTILITY FUNCTIONS
+  function randomNumber(min, max) {
+    return Math.floor(Math.random() * (1 + max - min) + min);
+  }
+
+  // Function to insert a box
+  function createBoxes(boxColor) {
+    $('body').append('<div class="' + boxColor + '"></div>');
+    $('body').children().last().css('background-color', boxColor);
+  }
+
   // function to remove employeeID from array when an employee is deleted.
-  function getColor() {
-    var colorNum = Math.floor((Math.random() * 5) + 1);
-    switch (colorNum) {
-      case 1:
-        return 'red';
-      case 2:
-        return 'blue';
-      case 3:
-        return 'yellow';
-      case 4:
-        return 'green';
-      case 5:
-        return 'purple';
-    }
+  function getColor(colorArray) {
+    var colorNum = randomNumber(0, (colorArray.length - 1));
+    return colorArray[colorNum];
   }
 
 });
