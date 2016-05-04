@@ -4,12 +4,22 @@ $(document).ready(function () {
   var color = getColor();
   var success = 'Good Job!';
   var missText = 'That was the wrong box - try again.';
+  var boxes = ['red', 'blue', 'yellow', 'green', 'purple' ];
+
+  // insert the boxes
+  function createBoxes(boxColor) {
+    $('body').append('<div class="' + boxColor + '"></div>')
+  }
+
+  for (var i = 0; i < boxes.length; i++) {
+    createBoxes(boxes[i]);
+  }
 
   // populate initial color
   $('.color').text(color);
 
   // color square click event handler
-  $('div').on('click', function () {
+  $('body').on('click', 'div', function () {
 
     // get class of clicked object
     var boxClass = $(this).prop('class');
