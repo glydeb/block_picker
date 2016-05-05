@@ -7,3 +7,8 @@ div {
   height: 200px;
   display: inline-block;
 }
+img {
+  display: none;
+  width: 200px;
+  height: 200px;
+}

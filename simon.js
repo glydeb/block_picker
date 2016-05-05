@@ -17,22 +17,30 @@ $(document).ready(function () {
   // color square click event handler
   $('body').on('click', 'div', function () {
 
-    // get class of clicked object
+    // get div & class of clicked object
     var boxClass = $(this).prop('class');
 
     // check for correct color, set message to proper result
     if (boxClass === color) {
-      color = updateSuccess();
+      $(this).css('background-color', '#EEE');
+      setTimeout(updateSuccess, 2000, boxClass);
+      $(this).children('img').fadeIn(400).delay(800).fadeOut(400);
     } else {
       updateMiss(boxClass);
     }
 
   });
 
+  // Function to be used with setTimeout
+  function setColorBack(color) {
+  }
+
   // Update paragraphs in the event of a correct click
   // picks a new color, as well.
-  function updateSuccess() {
-    var newColor = getColor(boxes);
+  function updateSuccess(clickedColor) {
+    var selector = '.' + clickedColor;
+    $(selector).css('background-color', clickedColor);
+    color = getColor(boxes);
 
     //update results
     if ($('.results').length === 0) {
@@ -43,8 +51,7 @@ $(document).ready(function () {
     }
 
     //update color
-    $('.color').text(newColor);
-    return newColor;
+    $('.color').text(color);
   }
 
   // Update results paragraph when an incorrect click is seen.
@@ -66,7 +73,9 @@ $(document).ready(function () {
   // Function to insert a box
   function createBoxes(boxColor) {
     $('body').append('<div class="' + boxColor + '"></div>');
-    $('body').children().last().css('background-color', boxColor);
+    $el = $('body').children().last()
+    $el.css('background-color', boxColor);
+    $el.append('<img src="thumbs-up.png" />');
   }
 
   // function to remove employeeID from array when an employee is deleted.
