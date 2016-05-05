@@ -24,7 +24,7 @@ $(document).ready(function () {
     if (boxClass === color) {
       $(this).css('background-color', '#EEE');
       setTimeout(updateSuccess, 2000, boxClass);
-      $(this).children('img').fadeIn(400).delay(800).fadeOut(400);
+      $(this).children('img').fadeIn(400).delay(800).fadeOut(700);
     } else {
       updateMiss(boxClass);
     }
